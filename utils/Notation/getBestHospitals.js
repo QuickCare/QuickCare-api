@@ -1,11 +1,8 @@
-var smartRequire = require("smart-require");
-var Route = smartRequire("utils/web/Route");
-var User = smartRequire("entities/User");
-var Session = smartRequire("entities/Session");
-var sha256 = require("sha256");
-var log = smartRequire("utils/logger")("Hospital");
+var getOrthodromicDistance = require("./orthdromicDistance");
+var Hospital = smartRequire("entities/");
 
-var getBestHospital = new Route("/hospital", "get", function(request, response){
+function getBestHospitals(level, coord)
+{
     if(Number.isInteger(request.body.level) && request.body.coord !== undefined && 
             Number.isFinite(request.body.coord.long) && Number.isFinite(request.body.coord.lat))
     {
@@ -16,6 +13,6 @@ var getBestHospital = new Route("/hospital", "get", function(request, response){
     reponse.json({
         error: "Wrong arguments were given" 
     });
-});
+}
 
 module.exports = getBestHospital;

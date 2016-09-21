@@ -9,7 +9,7 @@ var Specialty = {
         autoIncrement: true
     },
     name: {
-        type: Sequelize.String
+        type: Sequelize.STRING
     }
 };
 
