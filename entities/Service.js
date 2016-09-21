@@ -11,7 +11,7 @@ var Service = {
         autoIncrement: true
     },
     name: {
-        type: Sequelize.String
+        type: Sequelize.STRING
     },
     capacity : {
         type: Sequelize.INTEGER
@@ -24,6 +24,6 @@ var Service = {
 var model = extraLayer.register("Service", "service", Service);
 
 model.belongsTo(Hospital);
-model.belongsToMany(Specialty);
+model.belongsToMany(Specialty, {through: 'Service_Specialty'});
 
 module.exports = model;
