@@ -15,9 +15,6 @@ var Service = {
     },
     capacity : {
         type: Sequelize.INTEGER
-    },
-    employees : {
-        type: Sequelize.INTEGER
     }
 };
 

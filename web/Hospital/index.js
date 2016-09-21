@@ -1,18 +1,27 @@
 var smartRequire = require("smart-require");
 var Route = smartRequire("utils/web/Route");
 var Hospital = smartRequire("entities/Hospital");
+var getBestHospitals = smartRequire("utils/Notation/getBestHospitals");
 
-var getBestHospitals = new Route("/hospital", "get", function(request, response){
-    if(Number.isInteger(request.body.level) && request.body.coord !== undefined && 
-            Number.isFinite(request.body.coord.long) && Number.isFinite(request.body.coord.lat))
+var getHospital = new Route("/hospital", "get", function(request, response){
+    
+    var json = JSON.parse(request.query.json);
+    if(Number.isInteger(json.level) && json.coord !== undefined && 
+            Number.isFinite(json.coord.long) && Number.isFinite(json.coord.lat) &&
+            Number.isInteger(json.specialty))
     {
-        Hospital.findAll().then(function(result) {
-            response.json(result);
+        getBestHospitals(json.level, json.coord, json.service);
+        Hospital.findAll().then(function(results) {
+            response.json(results);
         });
     }
-    response.json({
-        error: "Wrong arguments were given" 
-    });
+    else
+    {
+        response.json({
+            error: "Wrong arguments were given",
+            u: Number.isFinite(json.coord.long)
+        });
+    }
 });
 
-module.exports = [getBestHospitals];
+module.exports = [getHospital];
