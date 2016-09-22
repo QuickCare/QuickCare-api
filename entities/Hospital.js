@@ -19,6 +19,12 @@ var Hospital = {
     },
     latitude: {
         type: Sequelize.DOUBLE
+    },
+    capacity : {
+        type: Sequelize.INTEGER
+    },
+    patients : {
+        type: Sequelize.INTEGER
     }
 };
 

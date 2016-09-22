@@ -8,7 +8,7 @@ var getHospital = new Route("/hospital", "get", function(request, response){
     var json = JSON.parse(request.query.json);
     if(Number.isInteger(json.level) && json.coord !== undefined && 
             Number.isFinite(json.coord.long) && Number.isFinite(json.coord.lat) &&
-            Number.isInteger(json.specialty))
+            Number.isInteger(json.service))
     {
         getBestHospitals(json.level, json.coord, json.service, function(results) {
             response.json(results);
@@ -17,8 +17,7 @@ var getHospital = new Route("/hospital", "get", function(request, response){
     else
     {
         response.json({
-            error: "Wrong arguments were given",
-            u: Number.isFinite(json.coord.long)
+            error: "Wrong arguments were given"
         });
     }
 });

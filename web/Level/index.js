@@ -3,7 +3,9 @@ var Route = smartRequire("utils/web/Route");
 var Level = smartRequire("entities/Level");
 
 var getLevel = new Route("/level", "get", function(request, response){
-    Level.findAll().then(function(result) {
+    Level.findAll({
+        order: "value DESC"
+    }).then(function(result) {
         response.json(result);
     });
 });
