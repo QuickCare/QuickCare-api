@@ -10,8 +10,7 @@ var getHospital = new Route("/hospital", "get", function(request, response){
             Number.isFinite(json.coord.long) && Number.isFinite(json.coord.lat) &&
             Number.isInteger(json.specialty))
     {
-        getBestHospitals(json.level, json.coord, json.service);
-        Hospital.findAll().then(function(results) {
+        getBestHospitals(json.level, json.coord, json.service, function(results) {
             response.json(results);
         });
     }
