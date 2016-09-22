@@ -1,6 +1,7 @@
 var Sequelize = require("sequelize");
 var smartRequire = require("smart-require");
 var extraLayer = smartRequire("config/dao");
+var Service = require("./Service");
 
 var Hospital = {
     id: {
@@ -29,5 +30,7 @@ var Hospital = {
 };
 
 var model = extraLayer.register("Hospital", "hospital", Hospital);
+
+model.belongsToMany(Service, {through: 'Hospital_Service'});
 
 module.exports = model;
