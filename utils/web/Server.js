@@ -3,6 +3,7 @@ var Route = smartRequire("utils/web/Route");
 var express = require("express");
 var log = smartRequire("utils/logger")("Server");
 var bodyParser = require('body-parser');
+var cors = require("cors");
 
 var Server = function(port) {
     this.app = undefined;
@@ -33,6 +34,7 @@ Server.prototype.start = function() {
     
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
+    this.app.use(cors());
     
     for(var i = 0 ; i < length ; i++)
     {
